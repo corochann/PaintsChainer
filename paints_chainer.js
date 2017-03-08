@@ -97,7 +97,7 @@ $(function () {
         $('#painting_status').attr('class', 'text-error').text('UPLOAD ERROR').show();
         $('#submit').prop('disabled', false);
         err_origin = origin
-        wihle( err_origin == origin ){  resetOrigin() }
+        while( err_origin == origin ){  resetOrigin() }
       },
       complete: function () {
         console.log('post finish');
@@ -134,7 +134,7 @@ $(function () {
       error: function () {
         $('#painting_status').attr('class', 'text-error').text('SERVER ERROR').show();
         err_origin = origin
-        wihle( err_origin == origin ){  resetOrigin() }
+        while( err_origin == origin ){  resetOrigin() }
       },
       complete: function () {
         $('#submit').prop('disabled', false);
@@ -155,7 +155,11 @@ $(function () {
 
   function resetOrigin() {
     if (location.hostname === 'paintschainer.preferred.tech') {
-      origin = 'http://paint20' + (Math.floor(Math.random() * 4) + 1) + '.preferred.tech'; // 1 ~ 4
+      if (location.protocol === 'https:') {
+        origin = '//paintschainer-api.preferred.tech';
+      } else {
+        origin = 'http://paint20' + (Math.floor(Math.random() * 4) + 1) + '.preferred.tech'; // 1 ~ 4
+      }
     }
   }
 
